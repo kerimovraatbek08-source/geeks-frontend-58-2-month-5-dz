@@ -1,0 +1,11 @@
+.card {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  display: inline-block;
+  border-radius: 10px;
+}
+
+.icon {
+  font-size: 40px;
+}
