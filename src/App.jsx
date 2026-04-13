@@ -1,19 +1,56 @@
-import Element from "./Components/Element";
+import React, { useState } from "react";
+import Quiz from "./Quiz";
 
 function App() {
+  const questions = [
+    {
+      question: "Какой язык используется в React?",
+      options: ["Python", "Java", "JavaScript", "C++"],
+      correctIndex: 2,
+    },
+    {
+      question: "Что возвращает React-компонент?",
+      options: ["HTML", "JSX", "CSS", "JSON"],
+      correctIndex: 1,
+    },
+    {
+      question: "Какой хук используется для состояния?",
+      options: ["useFetch", "useState", "useData", "useHook"],
+      correctIndex: 1,
+    },
+  ];
+
+  const [current, setCurrent] = useState(0);
+  const [score, setScore] = useState(0);
+
+  const handleAnswer = (isCorrect) => {
+    if (isCorrect) {
+      setScore(score + 1);
+    }
+
+    setTimeout(() => {
+      setCurrent(current + 1);
+    }, 1000);
+  };
+
+  if (current >= questions.length) {
+    return (
+      <div>
+        <h1>
+          Результат: {score} / {questions.length}
+        </h1>
+      </div>
+    );
+  }
+
   return (
     <div>
-      <h2>App.jsx</h2>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium
-        tempora, dignissimos possimus esse ut recusandae! Eveniet, ut magnam cum
-        unde ipsa molestiae veniam sequi error soluta, iste itaque repudiandae
-        quo! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Praesentium earum ea aliquid cupiditate ab inventore placeat, asperiores
-        aspernatur nisi minus, blanditiis nam obcaecati fuga doloremque odit
-        repellendus accusantium deserunt aperiam?
-      </p>
-      <Element />
+      <Quiz
+        question={questions[current].question}
+        options={questions[current].options}
+        correctIndex={questions[current].correctIndex}
+        onAnswer={handleAnswer}
+      />
     </div>
   );
 }
