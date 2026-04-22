@@ -1,27 +1,25 @@
 import React, { useState, useCallback } from "react";
+import { ChildButton } from "./ChildButton";
 
-const ChildButton = React.memo(({ onClick, label }) => {
-  console.log("ChildButton render");
+export const Counter = () => {
+  console.log("🔄 Counter render");
 
-  return <button onClick={onClick}>{label}</button>;
-});
-
-const Counter = () => {
   const [count, setCount] = useState(0);
 
+  const increment = () => {
+    setCount((prev) => prev + 1);
+  };
+
   const handleClick = useCallback(() => {
-    console.log("Child button clicked");
+    console.log("✅ Child button clicked");
   }, []);
 
   return (
     <div>
       <h2>Count: {count}</h2>
+      <button onClick={increment}>Increment</button>
 
-      <button onClick={() => setCount(count + 1)}>Увеличить</button>
-
-      <ChildButton onClick={handleClick} label="Я кнопка" />
+      <ChildButton onClick={handleClick} label="Click me" />
     </div>
   );
 };
-
-export default Counter;
